@@ -12,7 +12,23 @@ class User
     @date_of_birth  = args[:date_of_birth]
     @favorite_color = args[:favorite_color]
 
+  end
+
+  def save
     USERS.push self
+  end
+
+  class << self
+
+    def create(args = {})
+      user = self.new(args)
+      USERS.push user
+      return user
+    end
+
+    def all
+      USERS
+    end
 
   end
 
