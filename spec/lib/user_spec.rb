@@ -12,4 +12,12 @@ describe User do
     expect { 2.times { User.new.save } }.to change{ User.all.count }.by(2)
   end
 
+  it "sort method works as it should" do
+    User.clear
+    u1 = User.create first_name: "Avi", last_name: "Flombaum"
+    u2 = User.create first_name: "Adam", last_name: "Flombaum"
+    u3 = User.create first_name: "Adam", last_name: "Kramer"
+    User.sort_by(:last_name, :first_name).should == [u2,u1,u3]
+  end
+
 end

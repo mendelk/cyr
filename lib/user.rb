@@ -22,7 +22,7 @@ class User
 
     def create(args = {})
       user = self.new(args)
-      USERS.push user
+      user.save
       return user
     end
 
@@ -30,6 +30,17 @@ class User
       USERS
     end
 
+    def sort_by(*fields)
+      all.sort_by{ |user| fields.map{ |field| user.send(field) } }
+    end
+
+    def clear
+      USERS.clear
+    end
+
   end
 
 end
+
+# require 'pry'
+# pry
