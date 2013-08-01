@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
 
 require 'optparse'
-require 'users_parser'
-require 'user'
+require_relative 'lib/users_parser'
+require_relative 'lib/user'
 
 options = {}
 
@@ -35,18 +35,18 @@ puts msg + "Delimiter has been set to '#{options[:delimiter]}'"
 
 puts "Beginning parse..."
 
-UsersParser.parse(file, options[:delimiter])
+UsersParser.parse_file(file, options[:delimiter])
 
-puts "Parse complete."
+puts "Parse complete.\n\n"
 
 puts "Output 1:"
-User.sort_by(:gender, :last_name).each { |user| user.display }
+User.sort_by(:gender, :last_name).each { |user| puts user }
 puts ""
 
 puts "Output 2:"
-User.sort_by(:date_of_birth).each { |user| user.display }
+User.sort_by(:date_of_birth).each { |user| puts user }
 puts ""
 
-puts "Output 2:"
-User.all.sort_by{ |a,b| b.last_name <=> a.last_name }.each { |user| user.display }
+puts "Output 3:"
+User.sort_by(:last_name ).reverse.each { |user| puts user }
 puts ""
