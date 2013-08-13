@@ -1,3 +1,4 @@
+require 'app'
 require 'user'
 require 'users_parser'
 
