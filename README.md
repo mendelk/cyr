@@ -12,21 +12,18 @@ Usage
 To use this app, type this command into your terminal:
 
 ```
-ruby PATH/TO/app.rb [options] PATH/TO/file
+ruby PATH/TO/app.rb PATH/TO/file_1 delimiter_1 PATH/TO/file_n delimiter_n
 ```
 
+Delimiters can be a '|' (pipe), ',' (comma) or ' ' (space).
+
 The different outputs will appear in the terminal.
-
-Options
--------
-
-Set Delimiter with `-d` or `--delimiter`
 
 Complete Example
 ----------------
 
-This example uses one of three example files.
+This example uses the three example files.
 
 ```
-ruby app.rb -d ' ' lib/examples/space.txt
+ruby app.rb lib/examples/pipe.txt '|' lib/examples/comma.txt ',' lib/examples/space.txt ' '
 ```
