@@ -1,18 +1,14 @@
 #!/usr/bin/env ruby
 
 require 'optparse'
-require_relative 'lib/users_parser'
+require_relative 'lib/app'
 require_relative 'lib/user'
 
 options = {}
 
 optparse = OptionParser.new do|opts|
 
-  opts.banner = "Usage: app.rb [options] file"
-
-  opts.on('-d', '--delimiter DELIMITER', 'Set which delimiter to use') do |delimiter|
-    options[:delimiter] = delimiter
-  end
+  opts.banner = "Usage: ruby PATH/TO/app.rb PATH/TO/file_1 delimiter_1 PATH/TO/file_n delimiter_n"
 
   opts.on( '-h', '--help', "You're here." ) do
     puts opts
@@ -22,22 +18,16 @@ optparse = OptionParser.new do|opts|
 end
 
 optparse.parse!
-file = ARGV.first
 
-if file.nil?
-  puts "Nothing to scrape! Please pass in a file. See -h for help."
-  exit
-end
+app = App.instance
 
-msg = options[:delimiter] ? "" : "No delimiter passed. "
-options[:delimiter] ||= ','
-puts msg + "Delimiter has been set to '#{options[:delimiter]}'"
+puts "parsing options..."
+app.parse_options(ARGV)
+puts "#{app.files.count} file(s) found."
 
-puts "Beginning parse..."
-
-UsersParser.parse_file(file, options[:delimiter])
-
-puts "Parse complete.\n\n"
+puts "parsing files..."
+app.parse_files if app.files.any?
+puts "Done parsing \n\n"
 
 puts "Output 1:"
 User.sort_by(:gender, :last_name).each { |user| puts user }
