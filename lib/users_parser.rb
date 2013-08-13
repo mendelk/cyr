@@ -6,12 +6,6 @@ class UsersParser
 
   class << self
 
-    def parse_file(file, delimiter)
-      File.open(file, "r").each_line do |line|
-        parse line, delimiter
-      end
-    end
-
     def parse(line, delimiter)
       case delimiter
       when '|'
